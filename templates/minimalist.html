@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FBF9F4">
+<title>Épure — The Art of Forever · Élodie &amp; Julien</title>
+<meta name="description" content="Élodie & Julien invite you to celebrate their marriage. 12 June 2027 · Shillong, Meghalaya.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --ivory:#FBF9F4;
+  --beige:#F1EBE0;
+  --champagne:#E4D9C5;
+  --charcoal:#1A1917;
+  --charcoal-soft:#3A3833;
+  --taupe:#8C8375;
+  --taupe-soft:#B3AA9B;
+  --line:#E2DACB;
+  --line-strong:#CEC4B1;
+
+  --serif:'Playfair Display',Georgia,'Times New Roman',serif;
+  --sans:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+
+  --ease:cubic-bezier(.19,1,.22,1);
+  --ease-soft:cubic-bezier(.4,0,.2,1);
+
+  --pad:clamp(20px,5vw,80px);
+  --maxw:1440px;
+  --nav-h:68px;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+
+html{
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  overflow-x:hidden;
+  background:var(--ivory);
+  color:var(--charcoal);
+  font-family:var(--sans);
+  font-size:clamp(15px,.34vw + 14.2px,16.5px);
+  font-weight:300;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+body.locked{overflow:hidden;height:100vh;}
+
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;}
+::selection{background:var(--charcoal);color:var(--ivory);}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+.wrap{
+  width:100%;
+  max-width:var(--maxw);
+  margin-inline:auto;
+  padding-inline:var(--pad);
+}
+
+.label{
+  margin:0;
+  font-family:var(--sans);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:var(--taupe);
+}
+
+.rule{
+  display:block;
+  width:100%;
+  height:1px;
+  background:var(--line);
+  border:0;
+}
+
+.section{
+  position:relative;
+  padding-block:clamp(72px,11vw,150px);
+  scroll-margin-top:calc(var(--nav-h) + 12px);
+}
+.section + .section{border-top:1px solid var(--line);}
+.section--beige{background:var(--beige);}
+
+/* reveal */
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity 1.1s var(--ease),transform 1.1s var(--ease);
+  will-change:opacity,transform;
+}
+.reveal.in{opacity:1;transform:none;}
+
+/* masked line reveal */
+.lines .ln{display:block;overflow:hidden;}
+.lines .ln > span{
+  display:block;
+  transform:translateY(112%);
+  transition:transform 1.2s var(--ease);
+  will-change:transform;
+}
+.lines.in .ln > span{transform:translateY(0);}
+.lines.in .ln:nth-child(2) > span{transition-delay:.08s;}
+.lines.in .ln:nth-child(3) > span{transition-delay:.16s;}
+.lines.in .ln:nth-child(4) > span{transition-delay:.24s;}
+
+/* ============================================================
+   OPENING
+   ============================================================ */
+.opening{
+  position:fixed;
+  inset:0;
+  z-index:300;
+  display:grid;
+  place-items:center;
+  padding:clamp(24px,6vw,80px);
+  background:var(--ivory);
+  text-align:center;
+  transition:transform 1.35s var(--ease-soft),opacity .6s ease .75s;
+  will-change:transform,opacity;
+}
+.opening.gone{
+  transform:translateY(-101%);
+  opacity:0;
+  pointer-events:none;
+}
+
+.opening-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  max-width:920px;
+  transition:transform 1.1s var(--ease-soft),opacity .5s ease;
+}
+.opening.gone .opening-inner{transform:translateY(-40px);opacity:0;}
+
+.opening-initials{
+  margin:0;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(1.1rem,2.4vw,1.5rem);
+  letter-spacing:.5em;
+  text-indent:.5em;
+  color:var(--taupe);
+  opacity:0;
+  animation:fadeUp .9s var(--ease) .2s forwards;
+}
+.opening-initials em{
+  font-style:normal;
+  color:var(--taupe-soft);
+  margin-inline:.3em;
+}
+
+.opening-line{
+  display:block;
+  width:min(320px,54vw);
+  height:1px;
+  margin:clamp(26px,5vh,44px) 0;
+  background:var(--charcoal);
+  transform:scaleX(0);
+  transform-origin:center;
+  animation:drawLine 1.3s var(--ease) .85s forwards;
+}
+
+.opening-names{
+  margin:0;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(2.4rem,8vw,5.6rem);
+  line-height:1;
+  letter-spacing:-.02em;
+  color:var(--charcoal);
+  opacity:0;
+  animation:fadeUp 1.2s var(--ease) 1.35s forwards;
+}
+.opening-names em{
+  font-style:italic;
+  font-size:.5em;
+  color:var(--taupe);
+  display:block;
+  margin:.16em 0 .12em;
+  letter-spacing:.1em;
+}
+
+.opening-meta{
+  margin:clamp(24px,4.4vh,36px) 0 0;
+  font-family:var(--sans);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.34em;
+  text-indent:.34em;
+  text-transform:uppercase;
+  color:var(--taupe);
+  opacity:0;
+  animation:fadeUp 1s var(--ease) 1.8s forwards;
+}
+
+.opening-btn{
+  margin-top:clamp(32px,5.5vh,52px);
+  display:inline-flex;
+  align-items:center;
+  gap:.85em;
+  padding:1.05em 2.1em;
+  font-family:var(--sans);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.28em;
+  text-indent:.28em;
+  text-transform:uppercase;
+  color:var(--ivory);
+  background:var(--charcoal);
+  border-radius:999px;
+  opacity:0;
+  animation:fadeUp 1s var(--ease) 2.2s forwards;
+  transition:background-color .4s var(--ease-soft),transform .4s var(--ease),opacity .3s;
+}
+.opening-btn:hover{background:#000;transform:translateY(-2px);}
+.opening-btn:active{transform:translateY(0) scale(.99);}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(14px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes drawLine{
+  to{transform:scaleX(1);}
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:200;
+  height:var(--nav-h);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding-inline:var(--pad);
+  border-bottom:1px solid transparent;
+  background:transparent;
+  transition:background-color .45s var(--ease-soft),border-color .45s var(--ease-soft),backdrop-filter .45s;
+}
+.nav.scrolled{
+  background:rgba(251,249,244,.86);
+  -webkit-backdrop-filter:blur(16px) saturate(1.15);
+  backdrop-filter:blur(16px) saturate(1.15);
+  border-bottom-color:var(--line);
+}
+
+.nav-logo{
+  font-family:var(--serif);
+  font-size:clamp(1rem,1.4vw,1.15rem);
+  letter-spacing:.24em;
+  text-indent:.24em;
+  white-space:nowrap;
+  color:var(--charcoal);
+}
+.nav-logo em{
+  font-style:normal;
+  color:var(--taupe-soft);
+  margin-inline:.15em;
+}
+
+.nav-links{
+  display:flex;
+  gap:clamp(18px,2.6vw,40px);
+}
+.nav-links a{
+  position:relative;
+  font-family:var(--sans);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--taupe);
+  padding-block:6px;
+  transition:color .35s var(--ease-soft);
+}
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  left:0;right:0;bottom:0;
+  height:1px;
+  background:var(--charcoal);
+  transform:scaleX(0);
+  transform-origin:right;
+  transition:transform .45s var(--ease);
+}
+.nav-links a:hover{color:var(--charcoal);}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left;}
+
+.nav-tools{
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+
+.icon-btn{
+  width:38px;height:38px;
+  display:grid;place-items:center;
+  border-radius:999px;
+  color:var(--charcoal);
+  transition:background-color .35s var(--ease-soft),transform .35s var(--ease);
+}
+.icon-btn:hover{background:rgba(26,25,23,.06);}
+.icon-btn:active{transform:scale(.93);}
+.icon-btn svg{
+  width:17px;height:17px;
+  stroke:currentColor;fill:none;
+  stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;
+}
+
+/* sound icon states */
+.ico-off{display:none;}
+.icon-btn[aria-pressed="true"] .ico-on{display:none;}
+.icon-btn[aria-pressed="true"] .ico-off{display:block;}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  display:grid;
+  grid-template-columns:1fr 1.06fr;
+  min-height:100svh;
+  padding-top:var(--nav-h);
+}
+
+.hero-copy{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:clamp(44px,7vw,100px) var(--pad) clamp(44px,7vw,100px);
+}
+
+.hero-label{margin-bottom:clamp(24px,4vh,40px);}
+
+.hero-names{
+  margin:0;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(2.9rem,7.6vw,7rem);
+  line-height:.94;
+  letter-spacing:-.03em;
+  color:var(--charcoal);
+}
+.hero-names em{
+  display:block;
+  font-style:italic;
+  font-size:.36em;
+  line-height:1.4;
+  letter-spacing:.06em;
+  color:var(--taupe);
+  margin:.18em 0 .14em;
+}
+
+.hero-date{
+  display:flex;
+  align-items:center;
+  gap:clamp(14px,2vw,22px);
+  margin-top:clamp(32px,5.4vh,54px);
+  font-family:var(--sans);
+  font-size:clamp(10px,.9vw,11.5px);
+  font-weight:500;
+  letter-spacing:.26em;
+  text-indent:.26em;
+  text-transform:uppercase;
+  color:var(--charcoal);
+}
+.hero-date span{
+  flex:none;
+  width:clamp(28px,4vw,54px);
+  height:1px;
+  background:var(--line-strong);
+}
+
+.hero-place{
+  margin:clamp(18px,2.6vh,26px) 0 0;
+  font-family:var(--sans);
+  font-size:clamp(11px,1vw,12.5px);
+  font-weight:400;
+  letter-spacing:.14em;
+  color:var(--taupe);
+}
+
+.hero-media{
+  position:relative;
+  overflow:hidden;
+  background:var(--beige);
+  min-height:56vh;
+}
+.hero-media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  transform:scale(1.08);
+  transition:transform 2.4s var(--ease);
+  will-change:transform;
+}
+.hero-media.in img{transform:scale(1);}
+
+/* ============================================================
+   ANNOUNCEMENT
+   ============================================================ */
+.announce{
+  max-width:720px;
+  margin-inline:auto;
+  text-align:center;
+}
+
+.announce-lede{
+  margin:clamp(20px,3vw,32px) 0 0;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(1.5rem,3.2vw,2.4rem);
+  line-height:1.34;
+  letter-spacing:-.012em;
+  color:var(--charcoal);
+  text-wrap:balance;
+}
+
+.announce-body{
+  margin:clamp(24px,3.4vw,38px) auto 0;
+  max-width:52ch;
+  font-size:clamp(.95rem,1.05vw,1.05rem);
+  line-height:1.9;
+  color:var(--taupe);
+}
+
+.announce-sign{
+  margin:clamp(30px,4.4vw,48px) 0 0;
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:clamp(1.05rem,1.6vw,1.3rem);
+  color:var(--charcoal);
+}
+
+/* ============================================================
+   STORY — HORIZONTAL
+   ============================================================ */
+.story-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:24px;
+  flex-wrap:wrap;
+  margin-bottom:clamp(28px,4vw,46px);
+}
+
+.story-title{
+  margin:.18em 0 0;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(1.9rem,4.4vw,3.4rem);
+  line-height:1.06;
+  letter-spacing:-.02em;
+  color:var(--charcoal);
+}
+
+.story-nav{
+  display:flex;
+  gap:8px;
+}
+.story-nav button{
+  width:42px;height:42px;
+  display:grid;place-items:center;
+  border:1px solid var(--line-strong);
+  border-radius:50%;
+  color:var(--charcoal);
+  transition:background-color .35s var(--ease-soft),border-color .35s,opacity .35s;
+}
+.story-nav button:hover{background:var(--charcoal);border-color:var(--charcoal);color:var(--ivory);}
+.story-nav button:disabled{opacity:.28;pointer-events:none;}
+.story-nav svg{
+  width:15px;height:15px;
+  stroke:currentColor;fill:none;
+  stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;
+}
+
+.story-track{
+  display:flex;
+  gap:clamp(16px,2.4vw,32px);
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-x pan-y;
+  scrollbar-width:none;
+  padding-bottom:8px;
+  cursor:grab;
+}
+.story-track::-webkit-scrollbar{display:none;}
+.story-track.is-dragging{cursor:grabbing;scroll-snap-type:none;}
+.story-track.is-dragging *{cursor:grabbing;}
+
+.story-card{
+  flex:0 0 clamp(280px,42vw,420px);
+  scroll-snap-align:start;
+  margin:0;
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity 1s var(--ease),transform 1s var(--ease);
+}
+.story-card.in{opacity:1;transform:none;}
+
+.story-card figure{
+  margin:0;
+  overflow:hidden;
+  background:var(--champagne);
+  aspect-ratio:4/5;
+}
+.story-card img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transform:scale(1.06);
+  transition:transform 1.6s var(--ease),filter .6s;
+  filter:saturate(.94);
+}
+.story-card.in img{transform:scale(1);}
+.story-card:hover img{transform:scale(1.04);filter:saturate(1);}
+
+.story-card-meta{
+  display:flex;
+  gap:14px;
+  margin-top:20px;
+  font-family:var(--sans);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--taupe);
+}
+.story-card-meta span:first-child{color:var(--charcoal);}
+
+.story-card h3{
+  margin:10px 0 0;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(1.25rem,2vw,1.6rem);
+  line-height:1.2;
+  letter-spacing:-.01em;
+  color:var(--charcoal);
+}
+.story-card p{
+  margin:10px 0 0;
+  max-width:38ch;
+  font-size:.9rem;
+  line-height:1.75;
+  color:var(--taupe);
+}
+
+.story-hint{
+  display:none;
+  margin:18px 0 0;
+  font-family:var(--sans);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--taupe-soft);
+  text-align:right;
+}
+.story-hint::after{content:'Drag →';}
+
+/* ============================================================
+   DETAILS
+   ============================================================ */
+.details{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(32px,6vw,110px);
+  margin-top:clamp(34px,5vw,54px);
+}
+
+.detail{
+  padding-top:clamp(22px,3vw,32px);
+  border-top:1px solid var(--line-strong);
+}
+
+.detail-time{
+  margin:.6em 0 .4em;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(2rem,4.2vw,3.2rem);
+  line-height:1;
+  letter-spacing:-.02em;
+  color:var(--charcoal);
+}
+
+.detail-place{
+  margin:0 0 .7em;
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:clamp(1.02rem,1.3vw,1.16rem);
+  color:var(--charcoal-soft);
+}
+
+.detail-note{
+  margin:0;
+  max-width:34ch;
+  font-size:.9rem;
+  line-height:1.8;
+  color:var(--taupe);
+}
+
+/* ============================================================
+   TIMELINE
+   ============================================================ */
+.timeline{
+  position:relative;
+  max-width:820px;
+  margin:clamp(34px,5vw,56px) auto 0;
+  padding-left:clamp(52px,10vw,96px);
+}
+.timeline::before{
+  content:'';
+  position:absolute;
+  left:clamp(18px,4vw,36px);
+  top:8px;
+  bottom:8px;
+  width:1px;
+  background:linear-gradient(to bottom,transparent,var(--line-strong) 6%,var(--line-strong) 94%,transparent);
+}
+
+.tl-item{
+  position:relative;
+  padding-block:clamp(18px,2.6vw,26px);
+  border-bottom:1px solid var(--line);
+}
+.tl-item:last-child{border-bottom:0;}
+
+.tl-item::before{
+  content:'';
+  position:absolute;
+  left:calc(-1 * clamp(52px,10vw,96px) + clamp(18px,4vw,36px) - 3.5px);
+  top:calc(clamp(18px,2.6vw,26px) + .58em);
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--ivory);
+  border:1px solid var(--line-strong);
+  transition:background-color .5s var(--ease-soft),border-color .5s,transform .5s var(--ease);
+}
+.section--beige .tl-item::before{background:var(--beige);}
+.tl-item.in::before{
+  background:var(--charcoal);
+  border-color:var(--charcoal);
+  transform:scale(1.1);
+}
+
+.tl-time{
+  display:block;
+  font-family:var(--sans);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:var(--taupe);
+}
+
+.tl-title{
+  margin:.4em 0 0;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(1.3rem,2.4vw,1.75rem);
+  line-height:1.2;
+  letter-spacing:-.01em;
+  color:var(--charcoal);
+}
+
+.tl-text{
+  margin:.5em 0 0;
+  max-width:48ch;
+  font-size:.9rem;
+  line-height:1.75;
+  color:var(--taupe);
+}
+
+/* ============================================================
+   COUNTDOWN
+   ============================================================ */
+.countdown{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  max-width:820px;
+  margin:clamp(30px,4.4vw,44px) auto 0;
+  border-top:1px solid var(--line-strong);
+  border-bottom:1px solid var(--line-strong);
+}
+.cd{
+  padding:clamp(22px,3.4vw,36px) 8px;
+  text-align:center;
+  border-left:1px solid var(--line);
+}
+.cd:first-child{border-left:0;}
+.cd-num{
+  display:block;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(1.9rem,4.6vw,3.6rem);
+  line-height:1;
+  letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums;
+  color:var(--charcoal);
+}
+.cd-lbl{
+  display:block;
+  margin-top:.9em;
+  font-family:var(--sans);
+  font-size:9.5px;
+  font-weight:500;
+  letter-spacing:.26em;
+  text-indent:.26em;
+  text-transform:uppercase;
+  color:var(--taupe);
+}
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:clamp(8px,1.1vw,16px);
+  margin-top:clamp(32px,5vw,50px);
+}
+
+.gi{
+  position:relative;
+  margin:0;
+  overflow:hidden;
+  background:var(--champagne);
+  cursor:pointer;
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity 1s var(--ease),transform 1s var(--ease);
+  -webkit-tap-highlight-color:transparent;
+}
+.gi.in{opacity:1;transform:none;}
+
+.gi img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transform:scale(1.07);
+  transition:transform 1.6s var(--ease),filter .6s ease;
+  filter:saturate(.92);
+}
+.gi.in img{transform:scale(1);}
+.gi:hover img{transform:scale(1.05);filter:saturate(1);}
+.gi:focus-visible{outline:1px solid var(--charcoal);outline-offset:-3px;}
+
+.gi-cap{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  padding:22px 16px 14px;
+  font-family:var(--sans);
+  font-size:9.5px;
+  font-weight:500;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--ivory);
+  background:linear-gradient(to top,rgba(26,25,23,.62),transparent);
+  opacity:0;
+  transform:translateY(6px);
+  transition:opacity .45s ease,transform .45s var(--ease);
+}
+.gi:hover .gi-cap,
+.gi:focus-visible .gi-cap{opacity:1;transform:none;}
+
+.gi:nth-child(1){grid-column:span 7;aspect-ratio:16/10;}
+.gi:nth-child(2){grid-column:span 5;aspect-ratio:4/5;}
+.gi:nth-child(3){grid-column:span 4;aspect-ratio:1;}
+.gi:nth-child(4){grid-column:span 4;aspect-ratio:1;}
+.gi:nth-child(5){grid-column:span 4;aspect-ratio:1;}
+.gi:nth-child(6){grid-column:span 12;aspect-ratio:21/9;}
+
+/* ============================================================
+   LOCATION
+   ============================================================ */
+.location{
+  display:grid;
+  grid-template-columns:1fr 1.1fr;
+  gap:clamp(30px,5vw,72px);
+  align-items:center;
+  margin-top:clamp(30px,4.6vw,48px);
+}
+
+.loc-name{
+  margin:.3em 0 .4em;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(1.7rem,3.4vw,2.5rem);
+  line-height:1.1;
+  letter-spacing:-.02em;
+  color:var(--charcoal);
+}
+
+.loc-address{
+  margin:0 0 clamp(20px,3vw,28px);
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:clamp(1rem,1.2vw,1.1rem);
+  line-height:1.7;
+  color:var(--taupe);
+}
+
+.loc-list{
+  list-style:none;
+  margin:0 0 clamp(22px,3vw,32px);
+  padding:0;
+}
+.loc-list li{
+  display:grid;
+  grid-template-columns:100px 1fr;
+  gap:16px;
+  padding:.66em 0;
+  border-top:1px solid var(--line);
+  font-size:.9rem;
+  line-height:1.6;
+  color:var(--charcoal-soft);
+}
+.loc-list li:first-child{border-top:0;}
+.loc-list li span{
+  font-family:var(--sans);
+  font-size:9.5px;
+  font-weight:500;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--taupe);
+  padding-top:.34em;
+}
+
+.map{
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--line-strong);
+  aspect-ratio:4/3;
+  background:var(--champagne);
+}
+.map iframe{
+  width:100%;height:100%;
+  border:0;
+  filter:grayscale(1) contrast(.96) brightness(1.02);
+  transition:filter .8s ease;
+}
+.map:hover iframe{filter:grayscale(.35) contrast(1);}
+
+/* ============================================================
+   CLOSING
+   ============================================================ */
+.closing{
+  position:relative;
+  min-height:100svh;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  text-align:center;
+  padding:clamp(90px,14vh,160px) var(--pad);
+  background:var(--charcoal);
+}
+.closing-bg{
+  position:absolute;
+  inset:0;
+}
+.closing-bg img{
+  width:100%;height:100%;
+  object-fit:cover;
+  filter:grayscale(.35) brightness(.52) contrast(1.05);
+  transform:scale(1.08);
+  transition:transform 3s var(--ease);
+}
+.closing.in .closing-bg img{transform:scale(1);}
+.closing-bg::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(26,25,23,.55),rgba(26,25,23,.72));
+}
+
+.closing-inner{
+  position:relative;
+  z-index:2;
+  max-width:900px;
+}
+.closing .label{color:rgba(251,249,244,.55);}
+
+.closing-msg{
+  margin:clamp(20px,3.4vw,34px) 0 0;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(1.9rem,5.6vw,4.4rem);
+  line-height:1.14;
+  letter-spacing:-.024em;
+  color:var(--ivory);
+  text-wrap:balance;
+}
+
+.closing-sig{
+  margin:clamp(30px,5vh,52px) 0 0;
+  font-family:var(--sans);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.34em;
+  text-indent:.34em;
+  text-transform:uppercase;
+  color:rgba(251,249,244,.55);
+}
+
+.closing-actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  margin-top:clamp(34px,5.4vh,54px);
+}
+.closing .btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.7em;
+  padding:.95em 1.8em;
+  font-family:var(--sans);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.24em;
+  text-indent:.24em;
+  text-transform:uppercase;
+  color:var(--ivory);
+  border:1px solid rgba(251,249,244,.32);
+  border-radius:999px;
+  transition:background-color .4s var(--ease-soft),border-color .4s,transform .4s var(--ease),color .4s;
+}
+.closing .btn:hover{
+  background:var(--ivory);
+  color:var(--charcoal);
+  border-color:var(--ivory);
+  transform:translateY(-2px);
+}
+.closing .btn svg{
+  width:15px;height:15px;
+  fill:currentColor;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer{
+  padding:clamp(24px,3.6vw,38px) var(--pad);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:14px;
+  background:var(--charcoal);
+  border-top:1px solid rgba(251,249,244,.1);
+  font-family:var(--sans);
+  font-size:9.5px;
+  font-weight:500;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:rgba(251,249,244,.42);
+}
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lightbox{
+  position:fixed;
+  inset:0;
+  z-index:400;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(16px,4vw,52px);
+  background:rgba(20,19,17,.96);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .5s ease,visibility .5s ease;
+}
+.lightbox.open{opacity:1;visibility:visible;}
+
+.lb-body{
+  position:relative;
+  max-width:min(92vw,1080px);
+  max-height:86vh;
+  transform:scale(.97);
+  transition:transform .55s var(--ease);
+}
+.lightbox.open .lb-body{transform:scale(1);}
+
+.lb-body img{
+  max-width:100%;
+  max-height:82vh;
+  width:auto;height:auto;
+  object-fit:contain;
+  display:block;
+}
+
+.lb-cap{
+  margin-top:16px;
+  text-align:center;
+  font-family:var(--sans);
+  font-size:9.5px;
+  font-weight:500;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:rgba(251,249,244,.55);
+}
+
+.lb-btn{
+  position:absolute;
+  z-index:2;
+  width:46px;height:46px;
+  display:grid;place-items:center;
+  border-radius:50%;
+  color:var(--ivory);
+  border:1px solid rgba(251,249,244,.24);
+  background:rgba(26,25,23,.4);
+  transition:background-color .3s ease,transform .3s var(--ease);
+}
+.lb-btn:hover{background:rgba(251,249,244,.16);transform:scale(1.06);}
+.lb-btn svg{
+  width:18px;height:18px;
+  stroke:currentColor;fill:none;
+  stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;
+}
+.lb-close{top:clamp(14px,3vw,30px);right:clamp(14px,3vw,30px);}
+.lb-prev{left:clamp(8px,2vw,26px);top:50%;margin-top:-23px;}
+.lb-next{right:clamp(8px,2vw,26px);top:50%;margin-top:-23px;}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1080px){
+  .nav-links{gap:16px;}
+  .nav-links a{font-size:9.5px;letter-spacing:.16em;}
+}
+
+@media (max-width:900px){
+  .nav-links{display:none;}
+
+  .hero{grid-template-columns:1fr;}
+  .hero-copy{
+    order:1;
+    padding:calc(var(--nav-h) + 40px) var(--pad) 40px;
+  }
+  .hero-media{
+    order:2;
+    height:62vh;
+    min-height:360px;
+  }
+  .hero-media img{min-height:0;height:100%;}
+
+  .details{grid-template-columns:1fr;gap:34px;}
+  .location{grid-template-columns:1fr;}
+  .map{order:-1;}
+
+  .story-hint{display:block;}
+  .story-card{flex-basis:clamp(260px,74vw,360px);}
+
+  .gi:nth-child(1){grid-column:span 12;aspect-ratio:16/10;}
+  .gi:nth-child(2){grid-column:span 6;aspect-ratio:4/5;}
+  .gi:nth-child(3){grid-column:span 6;aspect-ratio:4/5;}
+  .gi:nth-child(4){grid-column:span 6;aspect-ratio:1;}
+  .gi:nth-child(5){grid-column:span 6;aspect-ratio:1;}
+  .gi:nth-child(6){grid-column:span 12;aspect-ratio:16/9;}
+
+  .story-nav{display:none;}
+}
+
+@media (max-width:640px){
+  .countdown{grid-template-columns:repeat(2,1fr);}
+  .cd:nth-child(3){border-left:0;}
+  .cd:nth-child(1),.cd:nth-child(2){border-bottom:1px solid var(--line);}
+
+  .loc-list li{grid-template-columns:1fr;gap:4px;}
+  .loc-list li span{padding-top:0;}
+
+  .gi:nth-child(n){grid-column:span 12;aspect-ratio:4/3;}
+
+  .timeline{padding-left:38px;}
+  .timeline::before{left:12px;}
+  .tl-item::before{
+    left:calc(-38px + 12px - 3.5px);
+  }
+
+  .footer{flex-direction:column;align-items:flex-start;}
+}
+
+@media (max-width:400px){
+  .opening-initials{letter-spacing:.34em;text-indent:.34em;}
+  .nav-logo{letter-spacing:.16em;text-indent:.16em;}
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal,.gi,.story-card{opacity:1 !important;transform:none !important;}
+  .lines .ln > span{transform:none !important;}
+  .opening-initials,.opening-names,.opening-meta,.opening-btn{opacity:1 !important;}
+  .opening-line{transform:scaleX(1) !important;}
+}
+</style>
+</head>
+<body class="locked">
+
+<!-- ============================================================
+     OPENING
+     ============================================================ -->
+<div class="opening" id="opening">
+  <div class="opening-inner">
+    <p class="opening-initials">É <em>&amp;</em> J</p>
+
+    <span class="opening-line" aria-hidden="true"></span>
+
+    <h1 class="opening-names">
+      Élodie
+      <em>&amp;</em>
+      Julien
+    </h1>
+
+    <p class="opening-meta">12 June 2027 · Shillong</p>
+
+    <button class="opening-btn" id="discoverBtn">Discover Our Wedding</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<header class="nav" id="nav">
+  <a class="nav-logo" href="#top" aria-label="Élodie and Julien — home">É <em>&amp;</em> J</a>
+
+  <nav class="nav-links" aria-label="Sections">
+    <a href="#story">Story</a>
+    <a href="#details">Details</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#location">Location</a>
+  </nav>
+
+  <div class="nav-tools">
+    <button class="icon-btn" id="musicBtn" aria-label="Enable piano music" aria-pressed="false">
+      <svg class="ico-on" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 9.4h3.1L12 5.4v13.2l-4.9-4H4z"/>
+        <path d="M15.9 9.1a4 4 0 0 1 0 5.8"/>
+        <path d="M18.6 6.6a7.8 7.8 0 0 1 0 10.8"/>
+      </svg>
+      <svg class="ico-off" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 9.4h3.1L12 5.4v13.2l-4.9-4H4z"/>
+        <path d="M16.4 9.6l5 4.8M21.4 9.6l-5 4.8"/>
+      </svg>
+    </button>
+
+    <a class="icon-btn" id="calBtn"
+       href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%C3%89lodie%20%26%20Julien%20%E2%80%94%20Wedding&amp;dates=20270612T103000Z%2F20270612T173000Z&amp;details=Ceremony%20at%204%3A00%20PM%20%C2%B7%20Reception%20at%207%3A00%20PM&amp;location=Shillong%2C%20Meghalaya%2C%20India"
+       target="_blank" rel="noopener" aria-label="Add to Google Calendar">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3.4" y="5" width="17.2" height="15.6" rx="2"/>
+        <path d="M3.4 10h17.2M8 3v4M16 3v4"/>
+      </svg>
+    </a>
+
+    <a class="icon-btn" id="waBtn"
+       href="https://wa.me/?text=%C3%89lodie%20%26%20Julien%20invite%20you%20to%20their%20wedding%20%E2%80%94%2012%20June%202027%2C%20Shillong%2C%20Meghalaya."
+       target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.3a8.5 8.5 0 1 1 15.6-4.6Z"/>
+        <path d="M8.6 8.2c-.2 0-.5.1-.7.3-.3.3-.8.8-.8 1.9s.8 2.2 1 2.3c.1.2 1.6 2.6 4 3.5 1.9.7 2.4.6 2.8.5.4 0 1.3-.5 1.5-1 .2-.5.2-1 .1-1.1l-.5-.3-1.5-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.4-.5c.1-.2.1-.3 0-.5l-.6-1.5c-.2-.4-.3-.4-.5-.4h-.4Z"/>
+      </svg>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" aria-label="Introduction">
+    <div class="hero-copy">
+      <p class="label hero-label reveal">The Wedding · MMXXVII</p>
+
+      <h2 class="hero-names reveal">
+        Élodie
+        <em>&amp;</em>
+        Julien
+      </h2>
+
+      <div class="hero-date reveal">
+        <span aria-hidden="true"></span>
+        12 · 06 · 2027
+      </div>
+
+      <p class="hero-place reveal">Shillong · Meghalaya · India</p>
+    </div>
+
+    <div class="hero-media reveal" id="heroMedia">
+      <img
+        src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80"
+        alt="Élodie and Julien"
+        fetchpriority="high" decoding="async">
+    </div>
+  </section>
+
+  <!-- ===================== ANNOUNCEMENT ===================== -->
+  <section class="section" id="announcement">
+    <div class="wrap">
+      <div class="announce">
+        <p class="label reveal">The Invitation</p>
+
+        <p class="announce-lede lines">
+          <span class="ln"><span>Together with their families,</span></span>
+          <span class="ln"><span>Élodie and Julien request the pleasure</span></span>
+          <span class="ln"><span>of your company.</span></span>
+        </p>
+
+        <p class="announce-body reveal">
+          On a quiet Saturday in June, among the pines of Shillong, we will exchange
+          our vows — and we would like nothing more than to have you there.
+        </p>
+
+        <p class="announce-sign reveal">Élodie &amp; Julien</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STORY ===================== -->
+  <section class="section section--beige" id="story">
+    <div class="wrap">
+      <div class="story-head">
+        <div>
+          <p class="label reveal">Our Story</p>
+          <h2 class="story-title lines">
+            <span class="ln"><span>How we got here</span></span>
+          </h2>
+        </div>
+
+        <div class="story-nav" aria-hidden="true">
+          <button id="storyPrev" aria-label="Scroll story left">
+            <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+          </button>
+          <button id="storyNext" aria-label="Scroll story right">
+            <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="story-track" id="storyTrack">
+        <article class="story-card">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=900&q=80"
+                 alt="A first meeting" loading="lazy" decoding="async">
+          </figure>
+          <div class="story-card-meta"><span>2019</span><span>Paris</span></div>
+          <h3>The first coincidence</h3>
+          <p>A shared table at a crowded café. Two hours became four, and neither of us noticed the rain.</p>
+        </article>
+
+        <article class="story-card">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=900&q=80"
+                 alt="Travelling together" loading="lazy" decoding="async">
+          </figure>
+          <div class="story-card-meta"><span>2021</span><span>Lisbon</span></div>
+          <h3>The first long trip</h3>
+          <p>Ten days, one backpack each, and a promise that we would always choose the slower train.</p>
+        </article>
+
+        <article class="story-card">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80"
+                 alt="The proposal" loading="lazy" decoding="async">
+          </figure>
+          <div class="story-card-meta"><span>2025</span><span>Shillong</span></div>
+          <h3>The question</h3>
+          <p>On a hill above the clouds, with a ring that had been in a coat pocket for eleven weeks.</p>
+        </article>
+
+        <article class="story-card">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=900&q=80"
+                 alt="The next chapter" loading="lazy" decoding="async">
+          </figure>
+          <div class="story-card-meta"><span>2027</span><span>The beginning</span></div>
+          <h3>The next chapter</h3>
+          <p>Back where it was asked, surrounded by the people who made us who we are.</p>
+        </article>
+      </div>
+
+      <p class="story-hint" aria-hidden="true"></p>
+    </div>
+  </section>
+
+  <!-- ===================== DETAILS ===================== -->
+  <section class="section" id="details">
+    <div class="wrap">
+      <p class="label reveal">The Day</p>
+      <h2 class="story-title lines" style="margin-top:.18em">
+        <span class="ln"><span>Saturday, 12 June 2027</span></span>
+      </h2>
+
+      <div class="details">
+        <article class="detail reveal">
+          <p class="label">The Ceremony</p>
+          <p class="detail-time">4:00 PM</p>
+          <p class="detail-place">The Pine Garden</p>
+          <p class="detail-note">
+            Guests are received from half past three with something cold to drink.
+            The ceremony begins promptly at four.
+          </p>
+        </article>
+
+        <article class="detail reveal">
+          <p class="label">The Reception</p>
+          <p class="detail-time">7:00 PM</p>
+          <p class="detail-place">The Glasshouse</p>
+          <p class="detail-note">
+            Dinner, speeches and dancing until late. Dress is elegant —
+            think ivory, champagne and charcoal.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TIMELINE ===================== -->
+  <section class="section section--beige" id="timeline">
+    <div class="wrap">
+      <p class="label reveal">The Running Order</p>
+      <h2 class="story-title lines" style="margin-top:.18em">
+        <span class="ln"><span>A quiet, careful schedule</span></span>
+      </h2>
+
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <span class="tl-time">3:30 PM</span>
+          <h3 class="tl-title">Arrival</h3>
+          <p class="tl-text">Champagne on the lawn, a string trio, and a moment to breathe before it all begins.</p>
+        </div>
+
+        <div class="tl-item reveal">
+          <span class="tl-time">4:00 PM</span>
+          <h3 class="tl-title">The Ceremony</h3>
+          <p class="tl-text">Beneath the pines, we exchange our vows. Twenty-five minutes, a few tears, one very good kiss.</p>
+        </div>
+
+        <div class="tl-item reveal">
+          <span class="tl-time">5:00 PM</span>
+          <h3 class="tl-title">Golden Hour</h3>
+          <p class="tl-text">Photographs, oysters and the first of several toasts as the light turns amber.</p>
+        </div>
+
+        <div class="tl-item reveal">
+          <span class="tl-time">7:00 PM</span>
+          <h3 class="tl-title">Dinner</h3>
+          <p class="tl-text">A four-course menu at long tables. Seating is open — sit next to someone new.</p>
+        </div>
+
+        <div class="tl-item reveal">
+          <span class="tl-time">9:30 PM</span>
+          <h3 class="tl-title">The First Dance</h3>
+          <p class="tl-text">The band takes over. The floor opens to everyone immediately after.</p>
+        </div>
+
+        <div class="tl-item reveal">
+          <span class="tl-time">12:00 AM</span>
+          <h3 class="tl-title">The Last Song</h3>
+          <p class="tl-text">One final dance, one final drink, and a lift home for anyone who needs it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COUNTDOWN ===================== -->
+  <section class="section" id="countdown">
+    <div class="wrap center" style="text-align:center">
+      <p class="label reveal">The Countdown</p>
+      <h2 class="story-title lines" style="margin-top:.18em">
+        <span class="ln"><span>Until we say "I do"</span></span>
+      </h2>
+
+      <div class="countdown reveal" id="countdownEl" aria-live="polite">
+        <div class="cd"><span class="cd-num" id="cd-d">000</span><span class="cd-lbl">Days</span></div>
+        <div class="cd"><span class="cd-num" id="cd-h">00</span><span class="cd-lbl">Hours</span></div>
+        <div class="cd"><span class="cd-num" id="cd-m">00</span><span class="cd-lbl">Minutes</span></div>
+        <div class="cd"><span class="cd-num" id="cd-s">00</span><span class="cd-lbl">Seconds</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GALLERY ===================== -->
+  <section class="section section--beige" id="gallery">
+    <div class="wrap">
+      <p class="label reveal">Selected Photographs</p>
+      <h2 class="story-title lines" style="margin-top:.18em">
+        <span class="ln"><span>A few of our favourites</span></span>
+      </h2>
+
+      <div class="gallery" id="galleryGrid">
+        <figure class="gi" tabindex="0" data-cap="Paris, 2019">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80"
+               alt="Paris, 2019" loading="lazy" decoding="async">
+          <figcaption class="gi-cap">Paris, 2019</figcaption>
+        </figure>
+
+        <figure class="gi" tabindex="0" data-cap="The proposal">
+          <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=80"
+               alt="The proposal" loading="lazy" decoding="async">
+          <figcaption class="gi-cap">The proposal</figcaption>
+        </figure>
+
+        <figure class="gi" tabindex="0" data-cap="Hands">
+          <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=1000&q=80"
+               alt="Hands" loading="lazy" decoding="async">
+          <figcaption class="gi-cap">Hands</figcaption>
+        </figure>
+
+        <figure class="gi" tabindex="0" data-cap="Lisbon, 2021">
+          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1000&q=80"
+               alt="Lisbon, 2021" loading="lazy" decoding="async">
+          <figcaption class="gi-cap">Lisbon, 2021</figcaption>
+        </figure>
+
+        <figure class="gi" tabindex="0" data-cap="Golden hour">
+          <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=1000&q=80"
+               alt="Golden hour" loading="lazy" decoding="async">
+          <figcaption class="gi-cap">Golden hour</figcaption>
+        </figure>
+
+        <figure class="gi" tabindex="0" data-cap="Shillong, 2025">
+          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1600&q=80"
+               alt="Shillong, 2025" loading="lazy" decoding="async">
+          <figcaption class="gi-cap">Shillong, 2025</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LOCATION ===================== -->
+  <section class="section" id="location">
+    <div class="wrap">
+      <p class="label reveal">The Venue</p>
+      <h2 class="story-title lines" style="margin-top:.18em">
+        <span class="ln"><span>Shillong, Meghalaya</span></span>
+      </h2>
+
+      <div class="location">
+        <div class="reveal">
+          <h3 class="loc-name">The Cedar House</h3>
+          <p class="loc-address">
+            Oakland Road, Shillong,<br>
+            Meghalaya 793001, India
+          </p>
+
+          <ul class="loc-list">
+            <li><span>Ceremony</span>The Pine Garden · 4:00 PM</li>
+            <li><span>Reception</span>The Glasshouse · 7:00 PM</li>
+            <li><span>Parking</span>Complimentary valet at the north gate</li>
+            <li><span>Travel</span>35 minutes from Shillong Airport (SHL)</li>
+          </ul>
+
+          <a class="closing-btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=Shillong,+Meghalaya,+India"
+             target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:.7em;padding:.95em 1.8em;font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:.24em;text-indent:.24em;text-transform:uppercase;color:var(--ivory);background:var(--charcoal);border-radius:999px;transition:opacity .35s">
+            Open in Google Maps
+          </a>
+        </div>
+
+        <div class="map reveal">
+          <iframe
+            src="https://www.google.com/maps?q=Shillong%2C%20Meghalaya%2C%20India&amp;z=13&amp;output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Map to Shillong, Meghalaya"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CLOSING ===================== -->
+  <section class="closing" id="closing">
+    <div class="closing-bg">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=80"
+           alt="" aria-hidden="true" loading="lazy" decoding="async">
+    </div>
+
+    <div class="closing-inner">
+      <p class="label reveal">With love</p>
+
+      <p class="closing-msg lines">
+        <span class="ln"><span>Thank you for being</span></span>
+        <span class="ln"><span>part of our story.</span></span>
+      </p>
+
+      <p class="closing-sig reveal">Élodie &amp; Julien · 12 June 2027 · Shillong</p>
+
+      <div class="closing-actions reveal">
+        <a class="btn"
+           href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%C3%89lodie%20%26%20Julien%20%E2%80%94%20Wedding&amp;dates=20270612T103000Z%2F20270612T173000Z&amp;details=Ceremony%20at%204%3A00%20PM%20%C2%B7%20Reception%20at%207%3A00%20PM&amp;location=Shillong%2C%20Meghalaya%2C%20India"
+           target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3.4" y="5" width="17.2" height="15.6" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M3.4 10h17.2M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          Add to calendar
+        </a>
+
+        <a class="btn"
+           href="https://wa.me/?text=%C3%89lodie%20%26%20Julien%20invite%20you%20to%20their%20wedding%20%E2%80%94%2012%20June%202027%2C%20Shillong%2C%20Meghalaya."
+           target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.3a8.5 8.5 0 1 1 15.6-4.6Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M8.6 8.2c-.2 0-.5.1-.7.3-.3.3-.8.8-.8 1.9s.8 2.2 1 2.3c.1.2 1.6 2.6 4 3.5 1.9.7 2.4.6 2.8.5.4 0 1.3-.5 1.5-1 .2-.5.2-1 .1-1.1l-.5-.3-1.5-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.4-.5c.1-.2.1-.3 0-.5l-.6-1.5c-.2-.4-.3-.4-.5-.4h-.4Z" fill="currentColor"/>
+          </svg>
+          Share on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span>Épure — The Art of Forever</span>
+  <span>É &amp; J · MMXXVII</span>
+</footer>
+
+<!-- ============================================================
+     LIGHTBOX
+     ============================================================ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Close">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous photo">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+  </button>
+
+  <div class="lb-body">
+    <img id="lbImg" src="" alt="">
+    <p class="lb-cap" id="lbCap"></p>
+  </div>
+
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Next photo">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+  </button>
+</div>
+
+<noscript>
+  <style>
+    #opening{display:none !important;}
+    body.locked{overflow:auto;height:auto;}
+    .reveal,.gi,.story-card{opacity:1 !important;transform:none !important;}
+    .lines .ln > span{transform:none !important;}
+  </style>
+</noscript>
+
+<script>
+(function(){
+  'use strict';
+
+  const $  = (s, c) => (c || document).querySelector(s);
+  const $$ = (s, c) => Array.prototype.slice.call((c || document).querySelectorAll(s));
+  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+  /* ==========================================================
+     1. OPENING SEQUENCE
+     ========================================================== */
+  let revealsStarted = false;
+
+  (function opening(){
+    const overlay = $('#opening');
+    const btn = $('#discoverBtn');
+    if (!overlay) return;
+
+    document.body.classList.add('locked');
+    window.scrollTo(0, 0);
+
+    let closed = false;
+
+    function close(){
+      if (closed) return;
+      closed = true;
+
+      overlay.classList.add('gone');
+      document.body.classList.remove('locked');
+      startReveals();
+
+      setTimeout(function(){
+        if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+      }, 1600);
+    }
+
+    btn.addEventListener('click', close);
+
+    document.addEventListener('keydown', function(e){
+      if (closed) return;
+      if (e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        close();
+      }
+    });
+
+    // safety net so nobody gets trapped
+    setTimeout(function(){
+      if (!closed) close();
+    }, 15000);
+  })();
+
+  /* ==========================================================
+     2. SCROLL REVEALS
+     ========================================================== */
+  function startReveals(){
+    if (revealsStarted) return;
+    revealsStarted = true;
+
+    const targets = $$('.reveal, .lines, .gi, .story-card, .tl-item, .hero-media, .closing');
+
+    if (!('IntersectionObserver' in window)){
+      targets.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+
+    const io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+    targets.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ==========================================================
+     3. NAV SCROLL STATE
+     ========================================================== */
+  (function nav(){
+    const bar = $('#nav');
+    if (!bar) return;
+    let ticking = false;
+
+    function update(){
+      bar.classList.toggle('scrolled', window.scrollY > 24);
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function(){
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }, { passive:true });
+
+    update();
+  })();
+
+  /* ==========================================================
+     4. COUNTDOWN
+     ========================================================== */
+  (function countdown(){
+    const target = new Date('2027-06-12T16:00:00+05:30').getTime();
+    const dEl = $('#cd-d'), hEl = $('#cd-h'), mEl = $('#cd-m'), sEl = $('#cd-s');
+    const box = $('#countdownEl');
+    if (!box) return;
+
+    const pad = n => String(n).padStart(2, '0');
+    let timer = null;
+
+    function tick(){
+      const diff = target - Date.now();
+
+      if (diff <= 0){
+        box.innerHTML = '<p class="story-title" style="grid-column:1/-1;margin:0">Today is the day.</p>';
+        if (timer) clearInterval(timer);
+        return;
+      }
+
+      const s = Math.floor(diff / 1000);
+      dEl.textContent = String(Math.floor(s / 86400)).padStart(3, '0');
+      hEl.textContent = pad(Math.floor((s % 86400) / 3600));
+      mEl.textContent = pad(Math.floor((s % 3600) / 60));
+      sEl.textContent = pad(s % 60);
+    }
+
+    tick();
+    timer = setInterval(tick, 1000);
+  })();
+
+  /* ==========================================================
+     5. HORIZONTAL STORY
+     ========================================================== */
+  (function story(){
+    const track = $('#storyTrack');
+    if (!track) return;
+
+    const prev = $('#storyPrev');
+    const next = $('#storyNext');
+
+    function step(){
+      const card = track.querySelector('.story-card');
+      if (!card) return 320;
+      const gap = parseFloat(getComputedStyle(track).columnGap || 24) || 24;
+      return card.getBoundingClientRect().width + gap;
+    }
+
+    function updateNav(){
+      if (!prev || !next) return;
+      const max = track.scrollWidth - track.clientWidth - 2;
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max;
+    }
+
+    if (prev) prev.addEventListener('click', function(){
+      track.scrollBy({ left: -step(), behavior: REDUCED ? 'auto' : 'smooth' });
+    });
+    if (next) next.addEventListener('click', function(){
+      track.scrollBy({ left: step(), behavior: REDUCED ? 'auto' : 'smooth' });
+    });
+
+    track.addEventListener('scroll', function(){
+      requestAnimationFrame(updateNav);
+    }, { passive:true });
+
+    window.addEventListener('resize', updateNav, { passive:true });
+    updateNav();
+
+    /* desktop drag */
+    let down = false, startX = 0, startLeft = 0, moved = false;
+
+    track.addEventListener('mousedown', function(e){
+      if (e.button !== 0) return;
+      down = true; moved = false;
+      startX = e.pageX;
+      startLeft = track.scrollLeft;
+      track.classList.add('is-dragging');
+    });
+
+    window.addEventListener('mousemove', function(e){
+      if (!down) return;
+      const dx = e.pageX - startX;
+      if (Math.abs(dx) > 4) moved = true;
+      if (moved){
+        e.preventDefault();
+        track.scrollLeft = startLeft - dx;
+      }
+    });
+
+    window.addEventListener('mouseup', function(){
+      if (!down) return;
+      down = false;
+      track.classList.remove('is-dragging');
+    });
+  })();
+
+  /* ==========================================================
+     6. LIGHTBOX
+     ========================================================== */
+  (function lightbox(){
+    const items = $$('.gi');
+    const lb = $('#lightbox');
+    const img = $('#lbImg');
+    const cap = $('#lbCap');
+    if (!items.length || !lb) return;
+
+    let index = 0;
+
+    function render(i){
+      index = (i + items.length) % items.length;
+      const fig = items[index];
+      const src = fig.querySelector('img');
+      img.src = src.currentSrc || src.src;
+      img.alt = src.alt || '';
+      cap.textContent = fig.dataset.cap || '';
+    }
+
+    function open(i){
+      render(i);
+      lb.classList.add('open');
+      document.body.classList.add('locked');
+      $('#lbClose').focus();
+    }
+
+    function close(){
+      lb.classList.remove('open');
+      document.body.classList.remove('locked');
+    }
+
+    items.forEach(function(fig, i){
+      fig.addEventListener('click', function(){ open(i); });
+      fig.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(i); }
+      });
+    });
+
+    $('#lbClose').addEventListener('click', close);
+    $('#lbPrev').addEventListener('click', function(){ render(index - 1); });
+    $('#lbNext').addEventListener('click', function(){ render(index + 1); });
+    lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+
+    document.addEventListener('keydown', function(e){
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') render(index - 1);
+      if (e.key === 'ArrowRight') render(index + 1);
+    });
+  })();
+
+  /* ==========================================================
+     7. PIANO MUSIC — manual only, never autoplay
+     ========================================================== */
+  (function music(){
+    const btn = $('#musicBtn');
+    if (!btn) return;
+
+    let ctx = null, master = null, delay = null, feedback = null, wet = null;
+    let running = false, arpTimer = null, padTimer = null;
+    let arpIndex = 0, chordIndex = 0;
+
+    // Four chords, arpeggiated. Dmaj7 · Bm7 · Gmaj7 · A
+    const CHORDS = [
+      { pad:[146.83, 185.00, 220.00, 277.18], arp:[293.66, 369.99, 440.00, 554.37, 440.00, 369.99] },
+      { pad:[123.47, 146.83, 185.00, 220.00], arp:[246.94, 293.66, 369.99, 440.00, 369.99, 293.66] },
+      { pad:[98.00,  123.47, 146.83, 185.00], arp:[196.00, 246.94, 293.66, 369.99, 293.66, 246.94] },
+      { pad:[110.00, 138.59, 164.81, 220.00], arp:[220.00, 277.18, 329.63, 440.00, 329.63, 277.18] }
+    ];
+
+    function build(){
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return false;
+
+      ctx = new Ctx();
+
+      master = ctx.createGain();
+      master.gain.value = 0;
+      master.connect(ctx.destination);
+
+      delay = ctx.createDelay(2);
+      delay.delayTime.value = 0.46;
+
+      feedback = ctx.createGain();
+      feedback.gain.value = 0.32;
+
+      wet = ctx.createGain();
+      wet.gain.value = 0.24;
+
+      delay.connect(feedback);
+      feedback.connect(delay);
+      delay.connect(wet);
+      wet.connect(ctx.destination);
+
+      return true;
+    }
+
+    function piano(freq, when, dur, vol){
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, when);
+      osc.detune.value = (Math.random() * 6) - 3;
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(2800, when);
+      filter.frequency.exponentialRampToValueAtTime(900, when + dur * 0.8);
+
+      gain.gain.setValueAtTime(0.0001, when);
+      gain.gain.exponentialRampToValueAtTime(vol, when + 0.012);
+      gain.gain.exponentialRampToValueAtTime(0.0001, when + dur);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(master);
+      gain.connect(delay);
+
+      osc.start(when);
+      osc.stop(when + dur + 0.1);
+    }
+
+    function pad(freqs){
+      const when = ctx.currentTime + 0.05;
+      const dur = 8.4;
+
+      freqs.forEach(function(f, i){
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
+
+        osc.type = 'sine';
+        osc.frequency.value = f;
+
+        filter.type = 'lowpass';
+        filter.frequency.value = 620;
+
+        gain.gain.setValueAtTime(0.0001, when);
+        gain.gain.linearRampToValueAtTime(0.028 / (i + 1), when + 2.8);
+        gain.gain.setValueAtTime(0.028 / (i + 1), when + dur - 2.6);
+        gain.gain.linearRampToValueAtTime(0.0001, when + dur);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(master);
+
+        osc.start(when);
+        osc.stop(when + dur + 0.2);
+      });
+    }
+
+    function arp(){
+      if (!running || !ctx) return;
+      const chord = CHORDS[chordIndex % CHORDS.length];
+      const note = chord.arp[arpIndex % chord.arp.length];
+
+      piano(note, ctx.currentTime + 0.03, 2.6, 0.055);
+      arpIndex++;
+
+      if (arpIndex % chord.arp.length === 0) chordIndex++;
+    }
+
+    function nextChord(){
+      if (!running || !ctx) return;
+      const chord = CHORDS[chordIndex % CHORDS.length];
+      pad(chord.pad);
+    }
+
+    function start(){
+      if (!ctx && !build()) return;
+      if (ctx.state === 'suspended') ctx.resume();
+
+      running = true;
+      btn.setAttribute('aria-pressed', 'true');
+      btn.setAttribute('aria-label', 'Mute piano music');
+
+      master.gain.cancelScheduledValues(ctx.currentTime);
+      master.gain.setTargetAtTime(0.9, ctx.currentTime, 1.6);
+
+      nextChord();
+      arp();
+
+      padTimer = setInterval(nextChord, 8200);
+      arpTimer = setInterval(arp, 720);
+    }
+
+    function stop(){
+      running = false;
+      btn.setAttribute('aria-pressed', 'false');
+      btn.setAttribute('aria-label', 'Enable piano music');
+
+      if (arpTimer){ clearInterval(arpTimer); arpTimer = null; }
+      if (padTimer){ clearInterval(padTimer); padTimer = null; }
+
+      if (ctx && master){
+        master.gain.cancelScheduledValues(ctx.currentTime);
+        master.gain.setTargetAtTime(0.0001, ctx.currentTime, 0.4);
+      }
+    }
+
+    btn.addEventListener('click', function(){
+      if (running) stop(); else start();
+    });
+  })();
+
+  /* ==========================================================
+     8. SMOOTH ANCHORS
+     ========================================================== */
+  $$('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      const id = a.getAttribute('href');
+      if (id.length < 2) return;
+      const el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' });
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
